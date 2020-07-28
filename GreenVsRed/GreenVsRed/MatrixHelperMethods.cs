@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace MMTask
 {
-    public static class MatrixHelperMethods
+    public static class MatrixHelperMethods             // Static helper methods that execute the logic of the game rules
     {
-        public static int[,] CreateMatrix(int x, int y)
+        public static int[,] CreateMatrix(int x, int y) // Creates and returns a matrix with given input (size) parameters
         {
             var matrix = new int[y, x];
 
@@ -24,7 +21,7 @@ namespace MMTask
             return matrix;
         }
 
-        public static int RedRule(int[,] matrix, int x, int y)
+        public static int RedRule(int[,] matrix, int x, int y) // Checks whether the first or the second red rule should be applied
         {
             var greens = GeneralRule(matrix, x, y);
 
@@ -35,7 +32,7 @@ namespace MMTask
             return 0;
         }
 
-        public static int GreenRule(int[,] matrix, int x, int y)
+        public static int GreenRule(int[,] matrix, int x, int y) // Checks whether the first or second green rule should be applied
         {
             var greens = GeneralRule(matrix, x, y);
 
@@ -46,11 +43,11 @@ namespace MMTask
             return 0;
         }
 
-        private static int GeneralRule(int[,] matrix, int x, int y)
+        private static int GeneralRule(int[,] matrix, int x, int y) // Private method that holds the rule logic which is applicable to both red and green
         {
             int greens = 0;
 
-            for (int i = y - 1; i <= y + 1; i++)
+            for (int i = y - 1; i <= y + 1; i++)                    // Checks all 8 neighboring cells of a target cell and counts the № of greens
             {
                 for (int j = x - 1; j <= x + 1; j++)
                 {
@@ -68,7 +65,7 @@ namespace MMTask
             return greens;
         }
 
-        private static bool CheckForGreen(int[,] matrix, int x, int y)
+        private static bool CheckForGreen(int[,] matrix, int x, int y) // Checks whether a single cell is green or if it's red/out of the array
         {
             try
             {
