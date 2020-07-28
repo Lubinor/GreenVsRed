@@ -3,7 +3,7 @@
 namespace MMTask
 {
 
-    public class GreenVsRed : Game          // The implementaion of a specific game, in our case Green vs. Red
+    public class GreenVsRed : IGame          // The implementaion of a specific game, in our case Green vs. Red
     {
         private static int greenCounter;    // Counter for the № times the target cell has been green across all generations
 
@@ -20,7 +20,7 @@ namespace MMTask
         public static GreenVsRed NewSession;
         public static int GreenCounter { get; set; }
 
-        public override void Start()
+        public void Start()
         {
             var matrixSize = Console.ReadLine().Split(", ");    // Setting up the size of the matrix
             var width = int.Parse(matrixSize[0]);
