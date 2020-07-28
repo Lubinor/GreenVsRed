@@ -1,18 +1,18 @@
 ﻿using System;
 
-namespace MMTask
+namespace GreenVsRed
 {
-    public static class MatrixHelperMethods             // Static helper methods that execute the logic of the game rules
+    public static class MatrixHelperMethods                           // Static helper methods that execute the logic of the game rules
     {
-        public static int[,] CreateMatrix(int x, int y) // Creates and returns a matrix with given input (size) parameters
+        public static int[,] CreateMatrix(int maxColumns, int maxRows) // Creates and returns a matrix with given input (size) parameters
         {
-            var matrix = new int[y, x];
+            var matrix = new int[maxRows, maxColumns];
 
-            for (int row = 0; row < y; row++)
+            for (int row = 0; row < maxRows; row++)
             {
                 string rowContent = Console.ReadLine();
 
-                for (int column = 0; column < x; column++)
+                for (int column = 0; column < maxColumns; column++)
                 {
                     matrix[row, column] = int.Parse(rowContent[column].ToString());
                 }
@@ -21,9 +21,9 @@ namespace MMTask
             return matrix;
         }
 
-        public static int RedRule(int[,] matrix, int x, int y) // Checks whether the first or the second red rule should be applied
+        public static int RedRule(int[,] matrix, int column, int row) // Checks whether the first or the second red rule should be applied
         {
-            var greens = GeneralRule(matrix, x, y);
+            var greens = GeneralRule(matrix, column, row);
 
             if (greens == 3 || greens == 6)
             {
@@ -32,9 +32,9 @@ namespace MMTask
             return 0;
         }
 
-        public static int GreenRule(int[,] matrix, int x, int y) // Checks whether the first or second green rule should be applied
+        public static int GreenRule(int[,] matrix, int column, int row) // Checks whether the first or second green rule should be applied
         {
-            var greens = GeneralRule(matrix, x, y);
+            var greens = GeneralRule(matrix, column, row);
 
             if (greens == 2 || greens == 3 || greens == 6)
             {
@@ -43,15 +43,15 @@ namespace MMTask
             return 0;
         }
 
-        private static int GeneralRule(int[,] matrix, int x, int y) // Private method that holds the rule logic which is applicable to both red and green
+        private static int GeneralRule(int[,] matrix, int column, int row) // Private method that holds the rule logic which is applicable to both red and green
         {
             int greens = 0;
 
-            for (int i = y - 1; i <= y + 1; i++)                    // Checks all 8 neighboring cells of a target cell and counts the № of greens
+            for (int i = row - 1; i <= row + 1; i++)                 // Checks all 8 neighboring cells of a target cell and counts the № of greens
             {
-                for (int j = x - 1; j <= x + 1; j++)
+                for (int j = column - 1; j <= column + 1; j++)
                 {
-                    if (i == y && j == x)
+                    if (i == row && j == column)
                     {
                         continue;
                     }
@@ -65,11 +65,11 @@ namespace MMTask
             return greens;
         }
 
-        private static bool CheckForGreen(int[,] matrix, int x, int y) // Checks whether a single cell is green or if it's red/out of the array
+        private static bool CheckForGreen(int[,] matrix, int row, int column) // Checks whether a single cell is green or if it's red/out of the array
         {
             try
             {
-                if (matrix[x, y] == 1)
+                if (matrix[row, column] == 1)
                 {
                     return true;
                 }
